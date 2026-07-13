@@ -1,9 +1,20 @@
 # FINDINGS.md — Session 12 Part 1: Migrate, Harden, Fix
 
-Each finding is reproduced against the local dev deployment, fixed, and
-verified. Commits reference the invariant number from Section 4.
+**Live deployment**: https://manishmcsa01--glc-v1-gateway-fastapi-app.modal.run
+
+**Verified live** (2026-07-13):
+```
+/healthz          → 200 {"ok":true,"port":8111}   ✓ gateway is up
+/v1/providers     → 401 (no token)                 ✓ A1 auth enforced
+/v1/providers     → 403 (wrong token)              ✓ A1 auth enforced
+/docs             → 404                            ✓ A2 docs hidden
+/openapi.json     → 404                            ✓ A2 docs hidden
+```
+
+**Tests**: 278 passed, 0 failed (`uv run pytest tests/ -q`)
 
 ---
+
 
 ## Section 4 Invariants (reference)
 
